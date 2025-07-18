@@ -11,6 +11,8 @@ from sklearn.metrics import accuracy_score, roc_auc_score, classification_report
 import joblib
 import warnings
 import streamlit as st
+from io import StringIO
+import requests
 
 # Configure Streamlit page
 st.set_page_config(
@@ -737,6 +739,8 @@ def main():
             if uploaded_file is not None:
                 try:
                     df = pd.read_csv(uploaded_file)
+                    st.write("Uploaded file preview:")
+                    st.dataframe(df.head())
                     smiles_col = st.selectbox("Select SMILES column:", df.columns)
 
                     if st.button("Predict Toxicity for All Compounds"):
